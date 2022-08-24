@@ -27,10 +27,10 @@ public class MovieServiceShould {
                         new Movie(1, "Dark Knight", 152, Genre.ACTION),
                         new Movie(2, "Memento", 113, Genre.THRILLER),
                         new Movie(3, "There's Something About Mary", 119, Genre.COMEDY),
-                        new Movie(4, "Super 8", 112, Genre.THRILLER),
+                        new Movie(4, "super 8", 112, Genre.THRILLER),
                         new Movie(5, "Scream", 111, Genre.HORROR),
                         new Movie(6, "Home Alone", 103, Genre.COMEDY),
-                        new Movie(7, "Matrix", 136, Genre.ACTION)
+                        new Movie(7, "Superman", 136, Genre.ACTION)
                 )
         );
         movieService = new MovieService(repository);
@@ -51,7 +51,21 @@ public class MovieServiceShould {
         assertThat(geetMoviesIds(movies), CoreMatchers.is(Arrays.asList(2, 3, 4, 5, 6)));
     }
 
+    @Test
+    public void return_movies_by_name() {
+        Collection <Movie> movies = movieService.findMovieByName("super");
+        assertThat(geetMoviesIds(movies),CoreMatchers.is((Arrays.asList(4,7))));
+
+    }
+
+    @Test
+    public void retirn_movies_by_director() {
+Collection <Movie> movies = movieService.findMovieByDirector("");
+
+    }
+
     private static List<Integer> geetMoviesIds(Collection<Movie> movies) {
         return movies.stream().map(Movie::getId).collect(Collectors.toList());
     }
+
 }
